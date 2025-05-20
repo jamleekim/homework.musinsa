@@ -18,7 +18,13 @@ public class ProductService implements GetLowestPricesProductsUseCase, GetLowest
 
 	@Override
 	public List<Product> getLowestPricesProducts() {
-		return productOutputPort.getLowestPricesProducts();
+		final var list = productOutputPort.getLowestPricesProducts();
+
+		if(list.isEmpty()) {
+			throw new IllegalStateException("No products found");
+		}
+
+		return list;
 	}
 
 	@Override

@@ -1,13 +1,11 @@
 package homework.musinsa.infrastructure.adapter.out.persistance.repository;
 
+import homework.musinsa.infrastructure.adapter.in.rest.exception.BrandNotFoundException;
 import homework.musinsa.domain.enums.Category;
 import homework.musinsa.infrastructure.entity.ProductEntity;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
-
-import static homework.musinsa.infrastructure.adapter.in.rest.exception.ExceptionMessageBuilder.EntityNotFoundException.message;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, Long>, ProductRepositoryCustom {
 
@@ -17,7 +15,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, P
 
     default ProductEntity viewProduct(final Long productId) {
         return findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException(message(ProductEntity.class, "productId", productId)));
+                .orElseThrow(() -> new BrandNotFoundException(ProductEntity.class.getName(), "productId", productId));
     }
 
 }

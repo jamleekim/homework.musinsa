@@ -26,18 +26,20 @@ public class ProductAdminService implements AddProductUseCase, UpdateProductUseC
 
 	@Override
 	public void update(UpdateProductCommand command) {
+		productOutputPort.getProduct(command.productId()); // 존재 유무 확인
 		final var product = Product.builder()
 				.price(command.price())
 				.brandId(command.brandId())
 				.category(command.category())
+				.productId(command.productId())
 				.build();
 		productOutputPort.update(product);
 	}
 
 	@Override
 	public void delete(Long productId) {
+		productOutputPort.getProduct(productId); // 존재 유무 확인
 		productOutputPort.delete(productId);
 	}
-
 
 }

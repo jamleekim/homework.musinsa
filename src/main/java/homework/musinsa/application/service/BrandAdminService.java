@@ -5,6 +5,7 @@ import homework.musinsa.application.port.in.DeleteBrandUseCase;
 import homework.musinsa.application.port.in.UpdateBrandUseCase;
 import homework.musinsa.application.port.out.BrandOutputPort;
 import homework.musinsa.domain.model.Brand;
+import homework.musinsa.infrastructure.adapter.in.rest.request.AddBrandCommand;
 import homework.musinsa.infrastructure.adapter.in.rest.request.DeleteBrandCommand;
 import homework.musinsa.infrastructure.adapter.in.rest.request.UpdateBrandCommand;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,8 @@ public class BrandAdminService implements AddBrandUseCase, UpdateBrandUseCase, D
 	private final BrandOutputPort brandOutputPort;
 
 	@Override
-	public Brand addBrand(String name) {
-		return brandOutputPort.addBrand(name);
+	public Brand addBrand(AddBrandCommand add) {
+		return brandOutputPort.addBrand(add.name());
 	}
 
 	@Override
